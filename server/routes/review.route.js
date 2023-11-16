@@ -1,5 +1,5 @@
 const ReviewController = require("../controllers/review.controller");
-const isAuthenticated = require("../middlewares/authMiddleware");
+const isAuthenticated = require("../middlewares/authMiddleware"); // Import the authentication middleware to check if the user is authenticated
 
 
 module.exports = (app) => {

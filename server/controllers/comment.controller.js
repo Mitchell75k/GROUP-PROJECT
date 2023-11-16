@@ -1,31 +1,55 @@
 const mongoose = require("mongoose");
 const Comment = require("../models/comment.model");
+const User = require("../models/user.model");
 
-const getAllComments = (req, res) => {
-    console.log('GET /api/comments request received');
-    Comment.find()
-        .then(allComments => {
-            console.log('Comments retrieved:', allComments);
-            res.json({ comments: allComments });
-        })
-        .catch(err => {
-            console.error('Error fetching comments:', err);
-            res.status(500).json({ message: "Error fetching comments", error: err });
-        });
-};
+const getAllComments = async (req, res) => {
+    try {
+        console.log("Getting all comments...");
+        let comments = await Comment.find(); //finds all comments in the database
 
-const getCommentById = (req, res) => {
-    console.log(`GET /api/comments/${req.params.id} request received`);
-    Comment.findOne({ _id: req.params.id })
-        .then(thisComment => {
-            console.log('Comment retrieved:', thisComment);
-            res.json({ comment: thisComment });
-        })
-        .catch(err => {
-            console.error('Error fetching comment by ID:', err);
-            res.status(500).json({ message: "Error fetching comment by ID", error: err });
-        });
-};
+        // Convert comments to plain JavaScript objects
+        comments = comments.map(comment => comment.toObject());
+
+        // Fetch the user for each comment
+        for (let comment of comments) {
+            const user = await User.findById(comment.userId);
+            if (user) {
+                comment.userName = user.userName; // Add the userName to the comment
+            }
+    }
+
+        if (comments.length === 0) { //checking if there are any comments in the database
+            console.log("No comments found");
+            return res.status(404).json({ error: 'No comments found' });
+        }
+        res.json(comments); //sends the comments to the client
+        console.log("Comments:", comments);
+    } catch (err) { //catching any errors
+        res.status(500).json({ message: err.message });
+    }
+}
+
+const getComment= async (req, res) => {
+    try {
+        let comment = await Comment.findById(req.params.id); //finds the comment in the database
+        if (!comment) {
+            console.log("Comment not found");
+            return res.status(404).json({ message: 'Comment not found' });
+        }
+
+        const user = await User.findById(comment.userId);
+        if (user) {
+            comment = comment.toObject(); // Convert the Mongoose document to a plain JavaScript object
+            comment.userName = user.userName; // Add the userName to the comment
+        }
+
+        res.json(comment); //sends the comment to the client
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: err.message });
+    }
+}
+
 
 const createNewComment = (req, res) => {
     console.log('POST /api/comments request received');
@@ -59,7 +83,7 @@ const deleteComment = (req, res) => {
 
 module.exports = {
     getAllComments,
-    getCommentById,
+    getComment,
     createNewComment,
     deleteComment
 };

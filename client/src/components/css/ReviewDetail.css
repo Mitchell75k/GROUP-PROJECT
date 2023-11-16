@@ -1,0 +1,57 @@
+/* ReviewDetail.css */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.ReviewDetail {
+    display: flex;
+    flex-direction: column; /* Align items in a column */
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.ReviewDetail .container {
+    display: flex;
+    flex-direction: column; /* Align items in a column */
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+.reviewDetails {
+    width: 100%;
+}
+
+.ReviewDetail h1 {
+    font-size: 2em;
+    margin-bottom: 0;
+    align-self: baseline;
+}
+
+.ReviewDetail h4 {
+    font-size: 1.2em;
+    margin-top: 0;
+    align-self: baseline;
+}
+
+.ReviewDetail p {
+    font-size: 1em;
+}
+
+.ReviewDetail a {
+    color: blue;
+    text-decoration: none;
+}
+
+.reviewButton {
+    width: 100%;
+    text-align: center; /* Center the button text */
+    margin-top: 30px; /* Adjust the margin-top value to add more space */
+}

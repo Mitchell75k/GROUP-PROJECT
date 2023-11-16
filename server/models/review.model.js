@@ -22,6 +22,11 @@ const reviewSchema = new mongoose.Schema({
         min: [1, "Rating must be between 1 and 5!"],
         max: [5, "Rating must be between 1 and 5!"],
     },
+    songLink: {
+        type: String,
+        required: [true, "Song link is required!"],
+        minlength: [1, "Song link must be at least 1 character long!"],
+    },
     userId: {
         type: mongoose.Schema.Types.ObjectId, //foreign key to the User model (one-to-many) so that each review belongs to a user
         ref: 'User',

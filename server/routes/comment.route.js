@@ -1,9 +1,8 @@
-const SpotifyAPIController = require("../controllers/comment.controller");
+const CommentController = require("../controllers/comment.controller");
 
 module.exports = app => {
-    app.get("/api/comments", SpotifyAPIController.getAllComments);
-    app.get("/api/comments/:id", SpotifyAPIController.getCommentById);
-    app.post("/api/comments", SpotifyAPIController.createNewComment);
-    app.put("/api/comments/:id", SpotifyAPIController.updateComment);
-    app.delete("/api/comments/:id", SpotifyAPIController.deleteComment);    
+    app.get("/api/comments", CommentController.getAllComments);
+    app.get("/api/comments/:id", CommentController.getComment);
+    app.post("/api/comments", CommentController.createNewComment);
+    app.delete("/api/comments/:id", CommentController.deleteComment);    
 };

@@ -61,7 +61,7 @@ require('./config/mongoose.config');
 // Configure routes
 commentRoutes(app);
 userRoutes(app);
-// reviewRoutes(app);
+reviewRoutes(app);
 
 // Start the server
 app.listen(8000, () => console.log('Listening on port: 8000'));

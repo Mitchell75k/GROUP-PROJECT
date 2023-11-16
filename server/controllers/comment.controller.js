@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Comment = require("../models/comments.model");
+const Comment = require("../models/comment.model");
 
 const getAllComments = (req, res) => {
     console.log('GET /api/comments request received');

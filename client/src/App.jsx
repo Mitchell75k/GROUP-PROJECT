@@ -13,10 +13,10 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route element={<LoginReg />} path="/" />
-          {/* <Route element={<ReviewForm />} path="/reviews/new" /> */}
           {/* <Route element={<AllReviews />} path="/reviews" /> */}
+          {/* <Route element={<ReviewForm />} path="/reviews/new" /> */}
           {/* <Route element={<UpdateReview />} path="/reviews/:id/edit" /> */}
-          {/* <Route element={<ReviewDetail />} path="/notes/:id" /> */}
+          {/* <Route element={<ReviewDetail />} path="/reviews/:id" /> */}
         </Routes>
       </BrowserRouter>
     </div>

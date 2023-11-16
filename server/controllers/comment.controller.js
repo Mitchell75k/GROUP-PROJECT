@@ -44,22 +44,6 @@ const createNewComment = (req, res) => {
 };
 
 
-const updateComment = (req, res) => {
-    console.log(`PUT /api/comments/${req.params.id} request received`);
-    Comment.findOneAndUpdate({ _id: req.params.id }, req.body, {
-        new: true,
-        runValidators: true
-    })
-        .then(updatedComment => {
-            console.log('Comment updated:', updatedComment);
-            res.json({ comment: updatedComment });
-        })
-        .catch(err => {
-            console.error('Error updating comment:', err);
-            res.status(500).json({ message: "Error updating comment", error: err });
-        });
-};
-
 const deleteComment = (req, res) => {
     console.log(`DELETE /api/comments/${req.params.id} request received`);
     Comment.deleteOne({ _id: req.params.id })
@@ -77,6 +61,5 @@ module.exports = {
     getAllComments,
     getCommentById,
     createNewComment,
-    updateComment,
     deleteComment
 };

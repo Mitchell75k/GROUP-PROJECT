@@ -1,9 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost/SpotifyAPI", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+mongoose.connect("mongodb://127.0.0.1:27017/spotify_project")
     .then(() => 
         console.log("WE IN THE DB BABY!"))
     .catch(err => 

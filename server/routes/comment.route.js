@@ -1,4 +1,4 @@
-const SpotifyAPIController = require("../controllers/SpotifyAPI.controllers");
+const SpotifyAPIController = require("../controllers/comment.controller");
 
 module.exports = app => {
     app.get("/api/comments", SpotifyAPIController.getAllComments);

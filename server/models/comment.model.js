@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/SpotifyAPI', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const commentSchema = new mongoose.Schema({
     commentBody: {

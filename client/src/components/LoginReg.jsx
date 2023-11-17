@@ -3,6 +3,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+//import './css/LoginReg.css';
+import './css/styles.css';
+import './css/NavBar.css';
+
+import NavBar from "./NavBar";
 
 const LoginReg = () => {
     const navigate = useNavigate();
@@ -86,61 +92,117 @@ const LoginReg = () => {
 
     return (
         <div>
-        <h2>Login</h2>
-        {logError && <p style={{ color: "red" }}>{logError}</p>}
-        <form onSubmit={handleLogin}>
-            <h3>Existing User? Login Here:</h3>
-            <input
-            type="text"
-            placeholder="Username"
-            value={userName}
-            onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            />
-            <button style={{ backgroundColor: "green", color: "white", marginLeft: "10px"}} type="submit">Login</button>
-        </form>
+            <NavBar />
+            <div className="text-center my-4">
+    <h1>Welcome!</h1>
+    <p>
+        Start your music review journey with us here at insert title.<br />
+        Log your favorite songs and artists and share your thoughts with the world!<br />
+        Let your voice be heard, and let the music play on!
+    </p>
+</div>
 
-        <h2>Register</h2>
-        {regError && regError.map((error, index) => (
-            <p key={index} style={{ color: "red", marginBottom: "10px" }}>
-                {error}
-            </p>
-        ))}
-        <form onSubmit={handleRegister}>
-            <h3>New User? Register Here:</h3>
-            <input
-            type="text"
-            placeholder="Username"
-            value={registerUsername}
-            onChange={(e) => setRegisterUsername(e.target.value)}
-            />
-            <input
-            type="email"
-            placeholder="Email"
-            value={registerEmail}
-            onChange={(e) => setRegisterEmail(e.target.value)}
-        />
-            <input
-            type="password"
-            placeholder="Password"
-            value={registerPassword}
-            onChange={(e) => setRegisterPassword(e.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            <button style={{ backgroundColor: "green", color: "white", marginTop: "10px"}} type="submit">Register</button>
-        </form>
+
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    {/* Registration Form Card */}
+                    <div className="card">
+                        <div className="card-body">
+                            <h2 className="card-title">Register</h2>
+                            {regError && regError.map((error, index) => (
+                                <p key={index} style={{ color: "red", marginBottom: "10px" }}>
+                                    {error}
+                                </p>
+                            ))}
+                            <form onSubmit={handleRegister}>
+                                <div className="mb-3">
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Username"
+                                        value={registerUsername}
+                                        onChange={(e) => setRegisterUsername(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <input
+                                        type="email"
+                                        className="form-control"
+                                        placeholder="Email"
+                                        value={registerEmail}
+                                        onChange={(e) => setRegisterEmail(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <input
+                                        type="password"
+                                        className="form-control"
+                                        placeholder="Password"
+                                        value={registerPassword}
+                                        onChange={(e) => setRegisterPassword(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <input
+                                        type="password"
+                                        className="form-control"
+                                        placeholder="Confirm Password"
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                    />
+                                </div>
+                                <button
+                                    style={{ backgroundColor: "green", color: "white" }}
+                                    type="submit"
+                                    className="btn btn-primary"
+                                >
+                                    Register
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-md-6">
+                    {/* Login Form Card */}
+                    <div className="card">
+                        <div className="card-body">
+                            <h2 className="card-title">Login</h2>
+                            {logError && <p style={{ color: "red" }}>{logError}</p>}
+                            <form onSubmit={handleLogin}>
+                                <div className="mb-3">
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Username"
+                                        value={userName}
+                                        onChange={(e) => setUsername(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <input
+                                        type="password"
+                                        className="form-control"
+                                        placeholder="Password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </div>
+                                <button
+                                    style={{ backgroundColor: "green", color: "white" }}
+                                    type="submit"
+                                    className="btn btn-primary"
+                                >
+                                    Login
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
+    
+    
 };
 
 export default LoginReg;

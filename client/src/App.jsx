@@ -17,6 +17,7 @@ const App = () => {
           <Route element={<ReviewForm />} path="/reviews/new" />
           <Route element={<UpdateReview />} path="/reviews/:id/edit" />  
           <Route element={<ReviewDetail />} path="/reviews/:id" /> 
+          <Route element={<LoginReg />} path="/login" />
         </Routes>
       </BrowserRouter>
     </div>

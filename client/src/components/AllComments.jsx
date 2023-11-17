@@ -1,67 +1,40 @@
-import React, { useState, useEffect } from 'react';
+// AllComments.jsx
+
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate} from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
-const AllComments = () => {
-    const navigate = useNavigate();
-
+const AllComments = ({ reviewId }) => {
     const [comments, setComments] = useState([]);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/session', { withCredentials: true })
+        // Fetch comments specific to the reviewId
+        axios.get(`http://localhost:8000/api/comments/${reviewId}`)
             .then(response => {
-                if (response.data.loggedIn) {
-                    setIsLoggedIn(true);
-                } else {
-                    navigate('/login');
-                }
+                setComments(response.data);
             })
             .catch(error => {
-                console.error('Error checking session:', error);
+                console.error('Error fetching comments for the review:', error);
             });
-    }, [navigate]);
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            axios.get('http://localhost:8000/api/comments', { withCredentials: true })
-                .then(response => {
-                    console.log(response.data); // Log the comment data to the console
-                    setComments(response.data);
-                })
-                .catch(error => {
-                    console.error('Error fetching comments:', error);
-                });
-            }
-    }, [isLoggedIn]);
-
-    if (!isLoggedIn) {
-        return <div>Loading...</div>;
-    }
+    }, [reviewId]);
 
     return (
-        <div className="AllComments container">
-            <h1 className="my-4">All Comments</h1>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>Comment</th>
-                        <th>Posted By</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {comments.map((comment, index) => (
-                        <tr key={index}>
-                            <td>{comment.commentBody}</td>
-                            <td>{comment.userName}</td>
-                        </tr>
+        <div className="container-fluid d-flex justify-content-center align-items-center h-100">
+            <div className="container mt-4">
+            <h2 className="mb-4"><span style={{ borderBottom: '2px solid #007bff' }}>Comments for this Review</span></h2>
+                <div className="list-group">
+                    {comments.map(comment => (
+                        <div key={comment._id} className="list-group-item">
+                            <p className="mb-0">{comment.commentBody}</p>
+                            <small className="text-muted">By: {comment.userName}</small>
+                        </div>
                     ))}
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
     );
+    
+    
 }
 
 export default AllComments;
-        

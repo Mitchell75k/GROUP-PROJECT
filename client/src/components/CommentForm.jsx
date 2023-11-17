@@ -1,17 +1,19 @@
-import React, {useState, useEffect} from 'react';
+// CommentForm.jsx
+
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const CommentForm = () => {
+
+const CommentForm = ({ reviewId }) => {
     const navigate = useNavigate();
     const [commentBody, setCommentBody] = useState('');
     const [userId, setUserId] = useState('');
-    const [reviewId, setReviewId] = useState('');
     const [errors, setErrors] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/session', {withCredentials: true})
+        axios.get('http://localhost:8000/api/session', { withCredentials: true })
             .then(response => {
                 if (response.data.loggedIn) {
                     console.log('User is logged in, user ID:', response.data.userId, 'Username:', response.data.username);
@@ -31,7 +33,7 @@ const CommentForm = () => {
             commentBody,
             userId,
             reviewId
-        }, {withCredentials: true})
+        }, { withCredentials: true })
             .then((res) => {
                 console.log(res);
             })
@@ -58,18 +60,32 @@ const CommentForm = () => {
     }
 
     return (
-        <div className="container">
-            <form onSubmit={submitHandler}>
-                <div className="form-group">
-                    <textarea className="form-control" name="commentBody" placeholder='Add comment...' onChange={(e) => setCommentBody(e.target.value)} />
-                </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
-            {
-                errors.map((err, index) => <p key={index}>{err}</p>)
-            }
+        <div className="container-fluid d-flex justify-content-center align-items-center h-100">
+            <div className="container">
+
+                <form onSubmit={submitHandler}>
+                    <div className="form-group">
+                        <textarea
+                            className="form-control"
+                            name="commentBody"
+                            placeholder="Add comment..."
+                            rows={5} // Adjust the number of rows as needed
+                            cols={60} // Adjust the number of columns as needed
+                            onChange={(e) => setCommentBody(e.target.value)}
+                        />
+                    </div>
+                    <button type="submit" className="btn btn-primary">
+                        Submit
+                    </button>
+                </form>
+                {errors.map((err, index) => (
+                    <p key={index}>{err}</p>
+                ))}
+            </div>
         </div>
     );
+    
+    
 }
 
 export default CommentForm;

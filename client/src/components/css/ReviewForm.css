@@ -1,0 +1,15 @@
+/* Add this to your existing CSS file or create a new one */
+
+.form-title {
+    border-bottom: 2px solid #007bff;
+}
+
+.review-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.error-message {
+    color: red;
+    margin-top: 5px;
+}

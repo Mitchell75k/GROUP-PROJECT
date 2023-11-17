@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
+import './css/ReviewForm.css';
+
+import NavBar from './NavBar';
+
 const UpdateReview = () => {
     const { id } = useParams();
     const [songTitle, setSongTitle] = useState('');
@@ -87,6 +94,7 @@ const UpdateReview = () => {
 
     return (
         <div className="container mt-4">
+            <NavBar />
             <h1>Update a Review</h1>
             <form onSubmit={updateReview}>
                 {Object.keys(errors).map((key, index) => (
@@ -114,7 +122,10 @@ const UpdateReview = () => {
                     <label htmlFor="songLink" className="form-label">Song Link:</label>
                     <input type="text" className="form-control" name="songLink" value={songLink} onChange={(e) => setSongLink(e.target.value)} />
                 </div>
-                <button type="submit" className="btn btn-primary">Update</button>
+                <div className="d-flex justify-content-between h-100">
+                    <button type="submit" className="btn btn-primary mr-2">Update</button>
+                    <button type="button" className="btn btn-danger ml-2" onClick={() => navigate(`/reviews/${id}`)}>Cancel</button>
+                </div>
             </form>
         </div>
     );

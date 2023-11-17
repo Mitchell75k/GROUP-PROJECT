@@ -1,0 +1,30 @@
+/* NavBar.css */
+
+* {
+    box-sizing: border-box;
+    font-family: 'Bangers', cursive;
+    font-size: 20px;
+}
+.fixed-top {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    padding: 20px;
+    padding-left: 50px;
+    padding-right: 100px;
+    margin-bottom: 20px; /* Add margin-bottom to create space below the NavBar */
+}
+
+.navbar {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.ml-auto {
+    margin-left: auto !important;
+}
+
+.navbar-nav {
+    margin-right: 0; /* Remove default margin */
+}

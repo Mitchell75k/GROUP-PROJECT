@@ -2,23 +2,24 @@
 
 * {
     box-sizing: border-box;
-    font-family: 'Bangers', cursive;
-    font-size: 20px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 23px; /* Adjust the font size as needed */
 }
+
 .fixed-top {
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
-    padding: 20px;
+    padding: 0px;
     padding-left: 50px;
     padding-right: 100px;
-    margin-bottom: 20px; /* Add margin-bottom to create space below the NavBar */
 }
 
 .navbar {
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    font-size: 36px; /* Adjust the font size as needed */
 }
 
 .ml-auto {

@@ -64,10 +64,17 @@ module.exports.createReview = async (req, res) => {
         });
         console.log("New review created by: ", userId, ": ", newReview);
         res.status(201).json(newReview);
-    } catch (err) {
+    }
+    catch (err) {
         console.error('Error creating review:', err);
-        res.status(400).json({ message: err.message });
-        res.status(400).json({ error: 'Failed to create a new review', details: err.message });
+        if (err.name === 'ValidationError') {
+            const errors = {};
+            for (const field in err.errors) {
+                errors[field] = err.errors[field].message;
+            }
+            return res.status(400).json({ errors });
+        }
+        return res.status(500).json({ error: 'Failed to create a new review', details: err.message });
     }
 }
 

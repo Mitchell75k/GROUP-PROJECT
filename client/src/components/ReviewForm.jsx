@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './NavBar';
-import './css/ReviewForm.css'; // Import your CSS file
+import './css/ReviewForm.css'; 
 
 const ReviewForm = () => {
     const navigate = useNavigate();
@@ -59,7 +59,7 @@ const ReviewForm = () => {
                     if (errorResponse && typeof errorResponse === 'object' && errorResponse.errors) {
                         const errorArr = [];
                         for (const key of Object.keys(errorResponse.errors)) {
-                            errorArr.push(errorResponse.errors[key].message);
+                            errorArr.push(errorResponse.errors[key]); // Only push the error message
                         }
                         setErrors(errorArr);
                     } else {
@@ -75,11 +75,10 @@ const ReviewForm = () => {
 
     return (
         <>
-            <div >
+            <div className="container col-30" >
                 <NavBar />
                 <h2><span className="form-title">Write a Review</span></h2>
                 <form onSubmit={submitHandler} className="review-form">
-                    {errors.map((err, index) => <p key={index} className="error-message">{err}</p>)}
                     <div className="form-group">
                         <label htmlFor="songTitle">Song Title</label>
                         <input onChange={(e) => setSongTitle(e.target.value)} type="text" className="form-control" id="songTitle" />
@@ -106,8 +105,10 @@ const ReviewForm = () => {
                         <label htmlFor="rating">Rating</label>
                         <input onChange={(e) => setRating(e.target.value)} type="number" className="form-control" id="rating" />
                     </div>
-                    <button type="submit" className="btn btn-primary mr-5">Submit</button>
-                    <button type="button" className="btn btn-danger ml-5" onClick={() => navigate('/reviews')}>Cancel</button>
+                    <div className="d-flex justify-content-around">
+                        <button type="submit" className="btn btn-primary mr-5">Submit</button>
+                        <button type="button" className="btn btn-danger ml-5" onClick={() => navigate('/reviews')}>Cancel</button>
+                    </div>
                 </form>
                 {
                     errors.map((err, index) => <p key={index} className="error-message">{err}</p>)

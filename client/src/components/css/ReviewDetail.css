@@ -2,6 +2,7 @@
 
 .ReviewDetail {
     padding: 20px;
+    font-size: 18px;
 }
 
 .reviewButton {
@@ -16,11 +17,11 @@
     background-color: #f8f9fa;
     padding: 30px;
     border-radius: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .commentForm {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .allComments {

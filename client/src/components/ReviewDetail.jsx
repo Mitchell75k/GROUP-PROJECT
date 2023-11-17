@@ -6,16 +6,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-
-//css imports
-import './css/AllComments.css';
+// CSS imports
 import './css/ReviewDetail.css';
-import './css/CommentForm.css';
-import './css/styles.css';
 
-//component imports
-import CommentForm from './CommentForm';
-import AllComments from './AllComments';
+// Component imports
+import CommentSection from './CommentSection';
 import NavBar from './NavBar';
 
 const ReviewDetail = () => {
@@ -31,7 +26,7 @@ const ReviewDetail = () => {
             .then(response => {
                 if (response.data.loggedIn) {
                     setIsLoggedIn(true);
-                    setUserId(response.data.userId); // Save the user ID in state
+                    setUserId(response.data.userId);
                 } else {
                     navigate('/login');
                 }
@@ -40,7 +35,6 @@ const ReviewDetail = () => {
                 console.error('Error checking session:', error);
             });
     }, [navigate]);
-    
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -64,8 +58,7 @@ const ReviewDetail = () => {
             .catch(error => {
                 console.error('Error deleting review:', error);
             });
-    }
-
+    };
 
     if (!isLoggedIn) {
         return <div>Loading...</div>;
@@ -77,38 +70,41 @@ const ReviewDetail = () => {
             <div className="container-spacing">
                 <div className="container ReviewDetail mt-6">
                     <div className="reviewDetails bg-light p-4 rounded">
-                        <div>
-                            <h1>{review.songTitle}</h1>
-                            <h4>By: {review.artistName}</h4>
+                        <div className="d-flex align-items-baseline">
+                            <h1 className="mr-3">{review.songTitle}</h1>
+                            <h6>By: {review.artistName}</h6>
                         </div>
-                        <h4>Reviewed by: {review.userName}</h4>
+                        <h6>Reviewed by: {review.userName}</h6>
                         <p>{review.review}</p>
                         <p>Rating: {review.rating}</p>
-                        <a href={review.songLink} className="btn btn-primary">Listen to the song</a>
+
+                        <iframe
+                            title="Spotify Web Player"
+                            src={`${review.songLink}`}
+                            width="650"
+                            height="100"
+                            allowtransparency="true"
+                            allow="encrypted-media"
+                        ></iframe>
+
                         <div className="reviewButton d-flex justify-content-between mt-4">
                             <button onClick={() => navigate(`/reviews`)} className="btn btn-secondary">Back</button>
                             {isLoggedIn && review.userId === userId && (
                                 <div className="d-flex">
                                     <button onClick={() => navigate(`/reviews/${review._id}/edit`)} className="btn btn-warning">Edit</button>
                                     <button onClick={deleteReview} className="btn btn-danger ml-4">Delete</button>
-                                    {/* Increased margin for better spacing */}
                                 </div>
                             )}
                         </div>
                     </div>
-    
-                    <div className="commentForm">
-                        <CommentForm reviewId={id} />
-                    </div>
-                    <div className="allComments mt-4">
-                        <AllComments reviewId={id} />
+
+                    <div className="commentSection mt-4">
+                        <CommentSection reviewId={id} userId={userId} />
                     </div>
                 </div>
             </div>
         </div>
     );
-    
-    
 }
 
 export default ReviewDetail;

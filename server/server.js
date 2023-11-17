@@ -38,13 +38,20 @@ app.use(
 // Configure CORS
 app.use(cors({
     origin: 'http://localhost:5173',
-    credentials: true // enabling set-cookies in the browser 
+    credentials: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 }));
+
+// Configure Content Security Policy
+app.use((req, res, next) => {
+    console.log('Setting CSP header');
+    res.setHeader('Content-Security-Policy', "frame-src 'self' https://open.spotify.com");
+    next();
+});
 
 // Configure body parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 // Session API endpoint
 app.get('/api/session', isAuthenticated, (req, res) => {

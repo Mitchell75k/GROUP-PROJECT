@@ -39,17 +39,17 @@ const NavBar = () => {
     return (
         <Navbar bg="dark" variant="dark" expand="lg" className="fixed-top">
             <Navbar.Brand>
-                <Link to="/reviews">Music Reviewer</Link>
+                <Link to="/reviews" className="site-title">Music Reviewer</Link>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto">
                     <NavDropdown title="Menu" id="basic-nav-dropdown">
                         {isLoggedIn && (
-                            <NavDropdown.Item href="/reviews">All Reviews</NavDropdown.Item>
+                            <NavDropdown.Item href="/reviews/new">+ Add a Review</NavDropdown.Item>
                         )}
                         {isLoggedIn && (
-                            <NavDropdown.Item href="/reviews/new">+ Add a Review</NavDropdown.Item>
+                            <NavDropdown.Item href="/reviews">All Reviews</NavDropdown.Item>
                         )}
                         {isLoggedIn ? (
                             <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>

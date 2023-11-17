@@ -29,3 +29,16 @@
 .navbar-nav {
     margin-right: 0; /* Remove default margin */
 }
+
+.navbar a {
+    text-decoration: none !important;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.site-title {
+    color: #fff !important;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    font-weight: bold;
+}

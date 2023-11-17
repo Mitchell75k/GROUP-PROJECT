@@ -16,20 +16,6 @@ const AllReviews = () => {
             .then(response => {
                 if (response.data.loggedIn) {
                     setIsLoggedIn(true);
-                } else {
-                    navigate('/login');
-                }
-            })
-            .catch(error => {
-                console.error('Error checking session:', error);
-            });
-    }, [navigate]);
-
-    useEffect(() => {
-        axios.get('http://localhost:8000/api/session', { withCredentials: true })
-            .then(response => {
-                if (response.data.loggedIn) {
-                    setIsLoggedIn(true);
                     // Fetch reviews if the user is logged in
                     axios.get('http://localhost:8000/api/reviews', { withCredentials: true })
                         .then(reviewResponse => {
@@ -49,38 +35,37 @@ const AllReviews = () => {
                 navigate('/login'); // Redirect to the login screen in case of an error
             });
     }, [navigate]);
-    
 
     return (
         <>
-        <NavBar />
-        <div className="AllReviews container">
-            <h1 className="my-4">All Reviews</h1>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>Song Title</th>
-                        <th>Artist Name</th>
-                        <th>Rating</th>
-                        <th>Posted By</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {reviews.map((review, index) => (
-                        <tr key={index}>
-                        <td><Link to={`/reviews/${review._id}`}>{review.songTitle}</Link></td>
-                        <td>{review.artistName}</td>
-                        <td>{review.rating}</td>
-                        <td>{review.userName }</td>
-                        <td>
-                        <Link to={`/reviews/${review._id}/edit`}>Edit</Link> 
-                        </td>
+            <NavBar />
+            <div className="AllReviews container">
+                <h1 className="my-4">All Reviews</h1>
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th>Song Title</th>
+                            <th>Artist Name</th>
+                            <th>Rating</th>
+                            <th>Posted By</th>
+                            <th>Actions</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        {reviews.map((review, index) => (
+                            <tr key={index}>
+                                <td><Link to={`/reviews/${review._id}`}>{review.songTitle}</Link></td>
+                                <td>{review.artistName}</td>
+                                <td>{review.rating}</td>
+                                <td>{review.userName}</td>
+                                <td>
+                                    <Link to={`/reviews/${review._id}/edit`}>Edit</Link>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </>
     );
 }
